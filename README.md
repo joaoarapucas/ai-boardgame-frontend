@@ -15,6 +15,18 @@ the website was made using React. The state of the game's board is fetched via w
 
 another feature is the use of the local storage: after registering or logging into a player, the auth token is saved to the local storage, so that the user doesn't need to log in everytime.
 
+## File structure
+
+| Folder        | Description                                     |
+| :------------ | :---------------------------------------------- |
+| `public`      | assets and items via direct URL                 |
+| `src/assets`  | assets, data and other direct import stuff      |
+| `src/core`    | Components, helpers, models and global types    |
+| `src/feature` | App modules, encapsulated in features           |
+| `src/routes`  | the website pages routes                        |
+| `src/styles`  | simple styles for the website                   |
+| `src/ui`      | some generic and reusable UI components         |
+
  ## Aesthetic
 
  the site is "ugly" on purpose! it is supposed to replicate the 2000s blogs era, especially the Geocities web pages.
@@ -39,7 +51,7 @@ here's a list of some archives and websites that I used as references when makin
 - placeholder
 
 
-# running the site locally
+# Running the site locally
 
 ## Requirements
 
@@ -52,18 +64,6 @@ here's a list of some archives and websites that I used as references when makin
 - TypeScript
 - React Router
 - Tailwind
-
-## File structure
-
-| Folder        | Description                                     |
-| :------------ | :---------------------------------------------- |
-| `public`      | assets and items via direct URL                 |
-| `src/assets`  | assets, data and other direct import stuff      |
-| `src/core`    | Components, helpers, models and global types    |
-| `src/feature` | App modules, encapsulated in features           |
-| `src/routes`  | the website pages routes                        |
-| `src/styles`  | simple styles for the website                   |
-| `src/ui`      | some generic and reusable UI components         |
 
 ## How to execute
 
