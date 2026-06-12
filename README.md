@@ -1,12 +1,51 @@
-# PI5 - Vite Frontend Starter
+# AI boardgame player frontend
 
-> Repositório com um scaffolding básico para construir o front-end do projeto do PI5: Aplicações de Inteligência Artificial, do prof. Guilherme Rey.
+> this repo cointains the website that uses my professor's boardgame API to show, create and join matches using our backend bot!
 
-## Requisitos
 
-- Node.js `v22` ou maior
+## About
 
-## Dependências
+this is an app for my college's 5th semester, where the class competed by building traditional AI bots to play a boardgame. the boardgame's name was not revealed for the class!
+
+this is a twin project alongside the [backend repo](https://github.com/joaoarapucas/ai-boardgame-backend). Here it is contained the web application that interacts with the game API, fetching games, players, etc.
+
+## Tech and details
+
+the website was made using React. The state of the game's board is fetched via websockets, and at the games list page the games are fetched using short polling: every 7 seconds, the site makes a request to list the games.
+
+another feature is the use of the local storage: after registering or logging into a player, the auth token is saved to the local storage, so that the user doesn't need to log in everytime.
+
+ ## Aesthetic
+
+ the site is "ugly" on purpose! it is supposed to replicate the 2000s blogs era, especially the Geocities web pages.
+
+ as such, it uses many animated gifs, basic HTML tags and rough color backgrounds. it even has a looping music that you can play/pause!
+
+## Limitations and future improvements
+
+because I was working part-time, had other college projects and was doing this all by myself, this sadly had some limitations! 
+
+here are some improvements that should be noticed in this frontend:
+- better data fetch states (errors and loading)
+- better stylization in each component and page
+- more decorations and animated gifs!
+
+still, the site is fully functional and was made with a lot of effort and research.
+
+## Inspirations
+
+here's a list of some archives and websites that I used as references when making my own:
+- placeholder
+- placeholder
+
+
+# running the site locally
+
+## Requirements
+
+- Node.js `v22` or greater
+
+## Dependencies
 
 - Vite
 - React
@@ -14,44 +53,38 @@
 - React Router
 - Tailwind
 
-## Organização deste repositório
+## File structure
 
-O projeto foi organizado de modo que vocês possam importar módulos utilizando aliases, para facilitar (e diminuir o uso de caminhos relativos), sendo:
+| Folder        | Description                                     |
+| :------------ | :---------------------------------------------- |
+| `public`      | assets and items via direct URL                 |
+| `src/assets`  | assets, data and other direct import stuff      |
+| `src/core`    | Components, helpers, models and global types    |
+| `src/feature` | App modules, encapsulated in features           |
+| `src/routes`  | the website pages routes                        |
+| `src/styles`  | simple styles for the website                   |
+| `src/ui`      | some generic and reusable UI components         |
 
-| Pasta         |    Alias     | Descrição                                       |
-| :------------ | :----------: | :---------------------------------------------- |
-| `public`      |     `--`     | Contém assets e itens acessíveis via URL direta |
-| `src/assets`  | `@assets/*`  | Assets de dados e outros para importação direta |
-| `src/core`    |  `@core/*`   | Componentes, helpers, modelos e tipos globais   |
-| `src/feature` | `@feature/*` | Módulos da aplicação, encapsulados em features  |
-| `src/routes`  | `@routes/*`  | Páginas equivalente às rotas da sua app         |
-| `src/styles`  | `@styles/*`  | Folhas de estilo                                |
-| `src/ui`      |   `@ui/*`    | Componentes genéricos de interface              |
+## How to execute
 
-## Como executar
-
-- Clone o projeto OU crie um novo projeto à partir deste usando `tiged`:
-  ```
-  npx tiged https://github.com/Yarquen/pi5-frontend-scaffolding [nome-do-projeto] --mode=git
-  ```
-- Instale as dependências com o seu package manager de preferência:
+- Install the dependencies with you preferred package manager:
   ```sh
   npm install
-  # OU
+  # OR
   pnpm install
-  # OU
+  # OR
   yarn install
-  # OU
+  # OR
   bun install
   ```
-- Execute o projeto:
+- Run the project:
   ```sh
   npm run dev
-  # OU
+  # OR
   pnpm run dev
-  # OU
+  # OR
   yarn dev
-  # OU
+  # OR
   bun dev
   ```
-- O projeto será executado em [`https://localhost:5173`](https://localhost:5173)
+- The project will be running in [`https://localhost:5173`](https://localhost:5173)
