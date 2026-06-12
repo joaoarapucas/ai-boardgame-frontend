@@ -96,6 +96,10 @@ export default function ViewGame({ gameId }) {
     const [hasGameState, setHasGameState] = useState(false);
 
     useEffect(() => {
+        //this is used as short polling: if match not yet started
+        //or not connected via websockets, it keeps pulling the current
+        //game situation manually. once gameState is defined, this 
+        //stops the API calls
         if (hasGameState) return;
 
         const meuIntervalo = setInterval(() => {
@@ -180,17 +184,14 @@ export default function ViewGame({ gameId }) {
                             'text-5xl font-black tracking-wider uppercase text-center select-none font-mono py-2'
                         )}
                         style={{
-                            // Cria o gradiente de arco-íris idêntico ao do marquee
                             backgroundImage: 'linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff, #ff0000)',
                             backgroundSize: '200% auto',
-                            // Clipa o gradiente exatamente no formato do texto
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
-                            // Animação super rápida (1 segundo) igual à que configuramos antes
                             animation: 'rainbow 7s linear infinite',
                         }}
                     >
-                        WINNER: {gameState.winner_team == 1 ? game?.turing_player?.group_name : game?.lovelace_player?.group_name}
+                        WINNER: {gameState.winner_team == 1 ? game?.turing_player?.ai_player_name : game?.lovelace_player?.ai_player_name}
                     </Typography>
                     <style>
                         {`
@@ -236,9 +237,7 @@ export default function ViewGame({ gameId }) {
                         <Typography
                             variant={'h1'}
                             asTag={'h1'}
-                            // Adicionadas as classes: w-full, max-w-full e truncate
                             className={cn('text-4xl', 'text-white', 'font-bold', 'w-full max-w-full truncate')}
-                            // Opcional: Mostra o nome completo em um balãozinho ao passar o mouse por cima
                             title={game?.lovelace_player?.ai_player_name}
                         >
                             {game?.lovelace_player?.ai_player_name ? game.lovelace_player.ai_player_name : 'Waiting...'}
@@ -255,7 +254,7 @@ export default function ViewGame({ gameId }) {
             <div className={cn('flex flex-row items-center gap-2 flex-wrap')}>
                 {game && game.spectators?.map((s, index) => (
                     <PlayerAvatar
-                        key={s.id || index} // Usa o ID do espectador ou o index como fallback
+                        key={s.id || index}
                         userImage={s.spectator_avatar}
                         className="w-20"
                     />

@@ -23,8 +23,8 @@ export function PlayerRegisterForm() {
 
   const loginForm = useForm({
     defaultValues: {
-      player_id: '',
-      player_access_token: '',
+      player_id: '212',
+      player_access_token: 'SFLPtCJzH4g1Y-DK8FfCXFUbQouh3u3bdQKMfKqeDD0',
     },
   });
 
@@ -59,7 +59,6 @@ export function PlayerRegisterForm() {
 
   async function handleLoginSubmit(dto) {
     try {
-
       setAccessToken(dto.player_access_token);
 
       const players = await listPlayers();
@@ -72,16 +71,15 @@ export function PlayerRegisterForm() {
           type: 'manual',
           message: 'Jogador não encontrado ou credenciais inválidas',
         });
-        setAccessToken(null)
+        setAccessToken(null);
         return;
       }
 
       setPlayer({ ...found, player_access_token: dto.player_access_token });
-
     } catch (err) {
       console.error(err?.message || '[ERR]: erro ao fazer login no jogador', err);
-      setPlayer(null)
-      setAccessToken(null)
+      setPlayer(null);
+      setAccessToken(null);
     }
   }
 
@@ -101,196 +99,192 @@ export function PlayerRegisterForm() {
   }, [player]);
 
   return (
-    <>
+    <div className={cn('bg-cyan-100 w-full max-w-md p-6 flex flex-col gap-5')}>
+
       {/* MARK: REGISTER FORM */}
       <form
         onSubmit={form.handleSubmit(handleRegisterSubmit)}
-        className={cn('flex flex-col gap-2')}
+        className={cn('flex flex-col gap-3')}
       >
-        <Controller
-          name={'group_name'}
-          control={form.control}
-          rules={{ required: 'O nome do grupo é obrigatório' }}
-          render={({ field }) => (
-            <div className={cn('flex flex-col gap-1')}>
-              <label className="text-xs">Nome do grupo</label>
-              <input
-                className={cn('border rounded-sm px-4 py-2')}
-                type={'text'}
-                {...field}
-              />
-              {errors.group_name && (
-                <span className={cn('text-red-500 text-xs')}>
-                  {errors.group_name.message}
-                </span>
-              )}
-            </div>
-          )}
-        />
+        <fieldset className="border-2 border-purple-900 p-2 rounded-none">
+          <legend className="text-xl text-slate-800 px-2">Register player</legend>
 
-        <Controller
-          name={'ai_player_name'}
-          control={form.control}
-          rules={{ required: 'O nome do jogador de IA é obrigatório' }}
-          render={({ field }) => (
-            <div className={cn('flex flex-col gap-1')}>
-              <label className="text-xs">Nome do jogador</label>
-              <input
-                className={cn('border rounded-sm px-4 py-2')}
-                type={'text'}
-                {...field}
-              />
-              {errors.ai_player_name && (
-                <span className={cn('text-red-500 text-xs')}>
-                  {errors.ai_player_name.message}
-                </span>
-              )}
-            </div>
-          )}
-        />
+          <Controller
+            name={'group_name'}
+            control={form.control}
+            rules={{ required: 'Name of the group is obrigatory.' }}
+            render={({ field }) => (
+              <div className={cn('flex flex-col gap-1.5 mt-2')}>
+                <div className="flex flex-row gap-1.5 items-center">
+                  <label className="text-base text-black text-nowrap w-32">Group name:</label>
+                  <input
+                    className="bg-white text-black text-base border border-black rounded-none px-1"
+                    type="text"
+                    {...field}
+                  />
+                </div>
+                {errors.group_name && (
+                  <span className="text-red-600 text-xs">{errors.group_name.message}</span>
+                )}
+              </div>
+            )}
+          />
 
-        <Controller
-          name={'ai_player_avatar'}
-          control={form.control}
-          rules={{ required: 'A URL do avatar do jogador de IA é obrigatória' }}
-          render={({ field }) => (
-            <div className={cn('flex flex-col gap-1')}>
-              <label className="text-xs">URL do avatar</label>
-              <input
-                className={cn('border rounded-sm px-4 py-2')}
-                type={'text'}
-                {...field}
-              />
-              {errors.ai_player_avatar && (
-                <span className={cn('text-red-500 text-xs')}>
-                  {errors.ai_player_avatar.message}
-                </span>
-              )}
-            </div>
-          )}
-        />
+          <Controller
+            name={'ai_player_name'}
+            control={form.control}
+            rules={{ required: 'The AI player name is obrigatory.' }}
+            render={({ field }) => (
+              <div className={cn('flex flex-col gap-1.5 mt-2')}>
+                <div className="flex flex-row gap-1.5 items-center">
+                  <label className="text-base text-black text-nowrap w-32">Player name:</label>
+                  <input
+                    className="bg-white text-black text-base border border-black rounded-none px-1"
+                    type="text"
+                    {...field}
+                  />
+                </div>
+                {errors.ai_player_name && (
+                  <span className="text-red-600 text-xs">{errors.ai_player_name.message}</span>
+                )}
+              </div>
+            )}
+          />
 
-        <Controller
-          name={'ai_player_description'}
-          control={form.control}
-          render={({ field }) => (
-            <div className={cn('flex flex-col gap-1')}>
-              <label className="text-xs">Descrição do jogador</label>
-              <input
-                className={cn('border rounded-sm px-4 py-2')}
-                type={'text'}
-                {...field}
-              />
-              {errors.ai_player_description && (
-                <span className={cn('text-red-500 text-xs')}>
-                  {errors.ai_player_description.message}
-                </span>
-              )}
-            </div>
-          )}
-        />
+          <Controller
+            name={'ai_player_avatar'}
+            control={form.control}
+            rules={{ required: 'The avatar URL is obrigatory' }}
+            render={({ field }) => (
+              <div className={cn('flex flex-col gap-1.5 mt-2')}>
+                <div className="flex flex-row gap-1.5 items-center">
+                  <label className="text-base text-black text-nowrap w-32">Avatar URL:</label>
+                  <input
+                    className="bg-white text-black text-base border border-black rounded-none px-1"
+                    type="text"
+                    {...field}
+                  />
+                </div>
+                {errors.ai_player_avatar && (
+                  <span className="text-red-600 text-xs">{errors.ai_player_avatar.message}</span>
+                )}
+              </div>
+            )}
+          />
 
-        <Controller
-          name={'ai_player_move_endpoint'}
-          control={form.control}
-          rules={{
-            required: 'O endpoint de movimento do jogador de IA é obrigatório',
-          }}
-          render={({ field }) => (
-            <div className={cn('flex flex-col gap-1')}>
-              <label className="text-xs">Endpoint de movimento do jogador</label>
-              <input
-                className={cn('border rounded-sm px-4 py-2')}
-                type={'text'}
-                {...field}
-              />
-              {errors.ai_player_move_endpoint && (
-                <span className={cn('text-red-500 text-xs')}>
-                  {errors.ai_player_move_endpoint.message}
-                </span>
-              )}
-            </div>
-          )}
-        />
+          <Controller
+            name={'ai_player_description'}
+            control={form.control}
+            render={({ field }) => (
+              <div className={cn('flex flex-col gap-1.5 mt-2')}>
+                <div className="flex flex-row gap-1.5 items-center">
+                  <label className="text-base text-black text-nowrap w-32">Description:</label>
+                  <input
+                    className="bg-white text-black text-base border border-black rounded-none px-1"
+                    type="text"
+                    {...field}
+                  />
+                </div>
+              </div>
+            )}
+          />
 
-        <button
-          type={'submit'}
-          disabled={isSubmitting}
-          className={cn(
-            'mt-4',
-            'px-4 py-2',
-            'bg-green-500 text-white rounded-md',
-            'hover:bg-green-600',
-            isSubmitting && 'opacity-50 cursor-not-allowed'
-          )}
-        >
-          {isSubmitting ? 'Registrando...' : 'Registrar Jogador'}
-        </button>
+          <Controller
+            name={'ai_player_move_endpoint'}
+            control={form.control}
+            rules={{ required: 'The  movement endpoint is obrigatory.' }}
+            render={({ field }) => (
+              <div className={cn('flex flex-col gap-1.5 mt-2')}>
+                <div className="flex flex-row gap-1.5 items-center">
+                  <label className="text-base text-black text-nowrap w-32">Move endpoint:</label>
+                  <input
+                    className="bg-white text-black text-base border border-black rounded-none px-1"
+                    type="text"
+                    {...field}
+                  />
+                </div>
+                {errors.ai_player_move_endpoint && (
+                  <span className="text-red-600 text-xs">{errors.ai_player_move_endpoint.message}</span>
+                )}
+              </div>
+            )}
+          />
+
+          <div className="flex justify-end mt-3">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="text-base text-blue-600 underline cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'Registering...' : 'Register player'}
+            </button>
+          </div>
+        </fieldset>
       </form>
 
-      ou faça login em um jogador já existente:
+      <p className="text-black text-sm">or log in to an existing player:</p>
 
       {/* MARK: LOGIN FORM */}
       <form
         onSubmit={loginForm.handleSubmit(handleLoginSubmit)}
-        className={cn('flex flex-col gap-2')}
+        className={cn('flex flex-col gap-3')}
       >
-        <Controller
-          name={'player_id'}
-          control={loginForm.control}
-          rules={{ required: 'O id do jogador é obrigatório' }}
-          render={({ field }) => (
-            <div className={cn('flex flex-col gap-1')}>
-              <label className="text-xs">Id do jogador</label>
-              <input
-                className={cn('border rounded-sm px-4 py-2')}
-                type={'text'}
-                {...field}
-              />
-              {loginErrors.player_id && (
-                <span className={cn('text-red-500 text-xs')}>
-                  {loginErrors.player_id.message}
-                </span>
-              )}
-            </div>
-          )}
-        />
+        <fieldset className="border-2 border-purple-900 p-2 rounded-none">
+          <legend className="text-xl text-slate-800 px-2">Login</legend>
 
-        <Controller
-          name={'player_access_token'}
-          control={loginForm.control}
-          rules={{ required: 'A chave de autenticação é obrigatória' }}
-          render={({ field }) => (
-            <div className={cn('flex flex-col gap-1')}>
-              <label className="text-xs">Chave de autenticação</label>
-              <input
-                className={cn('border rounded-sm px-4 py-2')}
-                type={'password'}
-                {...field}
-              />
-              {loginErrors.player_access_token && (
-                <span className={cn('text-red-500 text-xs')}>
-                  {loginErrors.player_access_token.message}
-                </span>
-              )}
-            </div>
-          )}
-        />
+          <Controller
+            name={'player_id'}
+            control={loginForm.control}
+            rules={{ required: 'Player ID is obrigatory.' }}
+            render={({ field }) => (
+              <div className={cn('flex flex-col gap-1.5 mt-2')}>
+                <div className="flex flex-row gap-1.5 items-center">
+                  <label className="text-base text-black text-nowrap w-32">Player ID:</label>
+                  <input
+                    className="bg-white text-black text-base border border-black rounded-none px-1"
+                    type="text"
+                    {...field}
+                  />
+                </div>
+                {loginErrors.player_id && (
+                  <span className="text-red-600 text-xs">{loginErrors.player_id.message}</span>
+                )}
+              </div>
+            )}
+          />
 
-        <button
-          type={'submit'}
-          disabled={isLoginSubmitting}
-          className={cn(
-            'mt-4',
-            'px-4 py-2',
-            'bg-green-500 text-white rounded-md',
-            'hover:bg-green-600',
-            isLoginSubmitting && 'opacity-50 cursor-not-allowed'
-          )}
-        >
-          {isLoginSubmitting ? 'Fazendo login...' : 'Fazer login'}
-        </button>
+          <Controller
+            name={'player_access_token'}
+            control={loginForm.control}
+            rules={{ required: 'Authentication key is obrigatory.' }}
+            render={({ field }) => (
+              <div className={cn('flex flex-col gap-1.5 mt-2')}>
+                <div className="flex flex-row gap-1.5 items-center">
+                  <label className="text-base text-black text-nowrap w-32">Access token:</label>
+                  <input
+                    className="bg-white text-black text-base border border-black rounded-none px-1"
+                    type="password"
+                    {...field}
+                  />
+                </div>
+                {loginErrors.player_access_token && (
+                  <span className="text-red-600 text-xs ">{loginErrors.player_access_token.message}</span>
+                )}
+              </div>
+            )}
+          />
+
+          <div className="flex justify-end mt-3">
+            <button
+              type="submit"
+              disabled={isLoginSubmitting}
+              className="text-base text-blue-600 underline cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoginSubmitting ? 'Fazendo login...' : 'Fazer login'}
+            </button>
+          </div>
+        </fieldset>
       </form>
-    </>
+    </div>
   );
 }

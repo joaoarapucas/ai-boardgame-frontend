@@ -20,10 +20,10 @@ export function updatePlayerMoveEndpoint(playerId, dto) {
   });
 }
 
-export function listGames(dto) {
+export function listGames(dto, status, page, pageSize) {
   return apiClient('/games', {
     method: 'GET',
-    query: dto,
+    query: { dto, status: status, page: page, page_size: pageSize }
   });
 }
 

@@ -13,14 +13,13 @@ export function PlayerUpdateForm() {
         player?.ai_player_move_endpoint || 'https://example.com/move-endpoint',
     },
   });
+
   const { formState } = form;
   const { isSubmitting, errors } = formState;
 
   async function handleSubmit(dto) {
     try {
-      const response = await updatePlayerMoveEndpoint(player?.id, {
-        ...dto,
-      });
+      const response = await updatePlayerMoveEndpoint(player?.id, { ...dto });
 
       if (!response?.id) {
         throw new Error('[ERR]: resposta inesperada ao atualizar jogador');
@@ -36,56 +35,55 @@ export function PlayerUpdateForm() {
     if (player?.id) {
       form.reset({
         ai_player_move_endpoint:
-          player?.ai_player_move_endpoint ||
-          'https://example.com/move-endpoint',
+          player?.ai_player_move_endpoint || 'https://example.com/move-endpoint',
       });
     }
   }, [player]);
 
   return (
-    <form
-      onSubmit={form.handleSubmit(handleSubmit)}
-      className={cn('flex flex-col gap-2')}
-    >
-      <Controller
-        name={'ai_player_move_endpoint'}
-        control={form.control}
-        rules={{
-          required: 'O endpoint de movimento do jogador de IA é obrigatório',
-        }}
-        render={({ field }) => (
-          <div className={cn('flex flex-col gap-1')}>
-            <label className="text-xs">Endpoint de movimento do jogador</label>
-            <input
-              className={cn('border rounded-sm px-4 py-2')}
-              type={'text'}
-              {...field}
-            />
-            {errors.ai_player_move_endpoint && (
-              <span className={cn('text-red-500 text-xs')}>
-                {errors.ai_player_move_endpoint.message}
-              </span>
-            )}
-          </div>
-        )}
-      />
-
-      <button
-        type={'submit'}
-        disabled={isSubmitting}
-        className={cn(
-          'mt-4',
-          'px-4',
-          'py-2',
-          'bg-green-500',
-          'text-white',
-          'rounded-md',
-          'hover:bg-green-600',
-          isSubmitting && 'opacity-50 cursor-not-allowed'
-        )}
+    <div className="bg-cyan-100 w-full max-w-md p-4">
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className={cn('flex flex-col gap-3')}
       >
-        {isSubmitting ? 'Atualizando...' : 'Atualizar Endpoint'}
-      </button>
-    </form>
+        <fieldset className="border-2 border-purple-900 p-2 rounded-none">
+          <legend className="text-xl text-slate-800 px-2">Update movement endpoint</legend>
+
+          <Controller
+            name={'ai_player_move_endpoint'}
+            control={form.control}
+            rules={{ required: 'The movement endpoint is obrigatory.' }}
+            render={({ field }) => (
+              <div className={cn('flex flex-col gap-1.5 mt-2')}>
+                <div className="flex flex-row gap-1.5 items-center">
+                  <label className="text-base text-black text-nowrap w-36">Move endpoint:</label>
+                  <input
+                    className="bg-white text-black text-base border border-black rounded-none px-1 w-full"
+                    type="text"
+                    {...field}
+                  />
+                </div>
+                {errors.ai_player_move_endpoint && (
+                  <span className="text-red-600 text-xs">
+                    {errors.ai_player_move_endpoint.message}
+                  </span>
+                )}
+              </div>
+            )}
+          />
+
+          <div className="flex justify-end mt-3">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="text-base text-blue-600 underline cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'Updating...' : 'Update endpoint'}
+            </button>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
   );
 }
