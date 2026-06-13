@@ -2,6 +2,7 @@
 
 > this repo cointains the website that uses my professor's boardgame API to show, create and join matches using our backend bot!
 
+![Pateta's Cyber Corner](src/assets/logo_transp.gif)
 
 ## About
 
@@ -47,9 +48,25 @@ still, the site is fully functional and was made with a lot of effort and resear
 ## Inspirations
 
 here's a list of some archives and websites that I used as references when making my own:
-- placeholder
-- placeholder
+- Yahoo! Geocities
+- [Cameron's World](https://www.cameronsworld.net/)
+- [Retro website resources](https://fructisfans.neocities.org/Links)
+- [a rummage bin](https://xixxii.neocities.org/gooftown/foryou)
+- [cooltext](https://cooltext.com/)
+- [GifCities](https://gifcities.org/search?q=loading&offset=0&page_size=200)
+- [Betty's Graphics](https://bettysgraphics.neocities.org/webgraphics)
+- [Hynospace Outlaw](https://store.steampowered.com/app/844590/Hypnospace_Outlaw/)
+- [Mari's Carrd](https://marianawrs.carrd.co/)
 
+## Gallery
+
+![Homepage](screenshots/homepage.png)
+
+![Games listing](screenshots/games_list.png)
+
+![Player form](screenshots/player_form.png)
+
+![Ongoing match](screenshots/running_game.png)
 
 # Running the site locally
 
